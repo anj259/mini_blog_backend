@@ -1,4 +1,5 @@
 const User = require("../models/user_model");
+const Post=require("../models/post_model")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -167,7 +168,12 @@ const deleteUser = async (req, res) => {
         if (!user){
             return res.status(404).json({ message: "User not found" });
         }
-        res.status(200).json({ message: "User deleted successfully" });
+        // also delete all posts of the user
+        await Post.deleteMany({ author: req.params.id });
+
+        res.status(200).json({
+            message: "User and all related posts deleted successfully",
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

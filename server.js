@@ -8,6 +8,8 @@ const post_route= require("./routes/post_route")
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+
 const PORT = process.env.PORT || 3000;
 
 db();

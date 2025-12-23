@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
     }
 
     if (!mobileRegex.test(mobileNumber)) {
-      return res.status(400).json({ message: "Mobile number must be exactly 10 digits" });
+      return res.status(400).json({ message: "Mobile number must be exactly 10 digits and must be string" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
